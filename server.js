@@ -1,18 +1,13 @@
 const express = require('express')
-const { join } = require('path')
 const app = express()
 
-app.use(express.static(join(__dirname, 'public')))
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
-
-app.use(require('./routes'))
-
-app.listen(3000, () => console.log('Server running'))
+const PORT = 3000
+app.listen(PORT, () => console.log('Server running'))
 
 // STUFF THAT SHOULD BE IN A STATIC WEBSERVER
 
-app.get('/', (req, res) => res.sendFile('public/html/index.html'))
+app.get('/', (req, res) => res.sendfile('static/html/index.html'))
+app.use('/a', express.static('static'))
 
 // END OF STUFF THAT SHOULD BE IN A STATIC WEBSERVER
 
@@ -35,6 +30,6 @@ let events = {
 }
 
 // Event get endpoint
-app.get('api/events', (req, res) => {
+app.get('/api/events', (req, res) => {
   res.send(JSON.stringify(events))
 })

@@ -8,8 +8,10 @@ async function getEvents () {
   const eventList = document.getElementById('eventList')
   if (!eventList) {
     console.log("Couldn't find event list")
+    return
   }
 
+  // Iterate over list of events fetched from API
   for (const ev of events.evs) {
   // For each event in the list, make new vent div and populate it with details
 
@@ -25,7 +27,7 @@ async function getEvents () {
   }
 }
 
-window.onload = function initState () {
+window.onload = function initSite () {
   // once page loads, grab the data to display on the site
   getEvents()
 }
